@@ -79,7 +79,8 @@ class MyWindow : public Window {
           if (std::sqrt(std::pow(x - mx, 2) + std::pow(y - my, 2)) <= pal_radius) {
             selected_color= i;
             cur_circle.vColor= palette[selected_color].vColor;
-            std::cout << "Pressed LEFT_CLICK: changed color" << std::endl;
+            std::cout << "Pressed LEFT_CLICK: changed color to " << cur_circle.vColor.r << " " << 
+            cur_circle.vColor.g << " " << cur_circle.vColor.b << std::endl;
             break;
           }
         }
