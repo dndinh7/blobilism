@@ -21,7 +21,7 @@ struct palColor {
 struct Circle {
   float x;
   float y;
-  float size;
+  int size;
   vecColor vColor;
   float alpha;
 };
@@ -32,7 +32,7 @@ class MyWindow : public Window {
 
   void setup() override {
     std::cout << "Window size: " << width() << ", " << height() << std::endl;
-    cur_circle= Circle { 0, 0, 5, vecColor {0, 0, 0}, 1 };
+
 
 
     // reference: https://colorswall.com/palette/102
@@ -51,6 +51,7 @@ class MyWindow : public Window {
     for (int i= 0; i < palette_length; i++) {
       palette.push_back(palColor{ starting_x + spacing*i, h, palette_colors[i]});
     }
+    cur_circle= Circle { 0, 0, 5, palette[selected_color].vColor, 1 };
   }
 
   virtual void mouseMotion(int x, int y, int dx, int dy) {
@@ -68,20 +69,34 @@ class MyWindow : public Window {
   virtual void mouseDown(int button, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
       // todo: check if user clicked a color 
-      // float mx = mouseX();  // current mouse pos x
-      // float my = mouseY();  // current mouse pos y
+      float mx = mouseX();  // current mouse pos x
+      float my = mouseY();  // current mouse pos y
+      if (my >= 0 && my <= pal_height) {
+        for (int i= 0; i < palette_length; i++) {
+          // checks if the click is in a circle
+          float x= palette[i].x;
+          float y= palette[i].y;
+          if (std::sqrt(std::pow(x - mx, 2) + std::pow(y - my, 2)) <= pal_radius) {
+            selected_color= i;
+            cur_circle.vColor= palette[selected_color].vColor;
+            std::cout << "Pressed LEFT_CLICK: changed color" << std::endl;
+            break;
+          }
+        }
+      }
+
     }
   }
 
   void keyDown(int key, int mods) {
     if (key == GLFW_KEY_UP) {
       // increase size of circle
-      cur_circle.size+= 5.0f;
+      cur_circle.size+= (cur_circle.size == 1) ? 4 : 5;
       std::cout << "Pressed UP: Increase point size to " << cur_circle.size << std::endl;
     }
     else if (key == GLFW_KEY_DOWN) {
       // decrease size of circle
-      cur_circle.size= std::max(1.0f, cur_circle.size - 5);
+      cur_circle.size= std::max(1, cur_circle.size - 5);
       std::cout << "Pressed DOWN: Decrease point size to " << cur_circle.size << std::endl;
     }
     else if (key == GLFW_KEY_LEFT) {
@@ -117,6 +132,10 @@ class MyWindow : public Window {
     square(width()/2.0f, 35, width(), 70);
 
     // todo : draw pallet
+
+    // this highlights the selected color
+    color(48.0f/255.0f, 197.0f/255.0f, 1.0f); // this is selected blue color
+    circle(palette[selected_color].x, palette[selected_color].y, pal_diameter+6);
     for (palColor c: palette) {
       color(c.vColor.r, c.vColor.g, c.vColor.b);
       circle(c.x, c.y, pal_diameter);
@@ -146,6 +165,7 @@ class MyWindow : public Window {
   const float pal_radius= 28;
   const float pal_diameter= pal_radius*2;
   const float pal_height= 70;
+  int selected_color= 0;
   
 };
 
