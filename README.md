@@ -8,8 +8,23 @@ This demo implements a simple drawing program based on a circle brush.
 * Clears the image
 
 ## Results
+  This program creates a window and allows
+  the user to choose a color and draw using their
+  mouse. The user can choose from the palette of
+  colors shown in the bottom of the window.
+  The user can adjust the size of the brush
+  by using the up and down arrow keys. The user can 
+  also adjust the transparency of the brush stroke
+  by using the left and right arrow keys. The user can 
+  change the brush to a circle by pressing '1', a square
+  by pressing '2', and a triangle by pressing '3'. 
+  The user can then clear the screen by pressing 'c'.
+  
+Here is a demo of the program:
+https://user-images.githubusercontent.com/72237791/214947404-4b959895-f3e3-416f-bc50-9dd57b883db4.mp4
 
-TODO: Put images of what you've made here
+
+  
 
 ## How to build
 
