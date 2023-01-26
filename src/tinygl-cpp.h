@@ -171,7 +171,7 @@ class Window {
     };
 
     // numVerts = numTris + 2 -> Set numTris = 16
-    float* circle = new float[3*(numTris+2)]; // numFloats = numVerts * 3 = 36
+    float* circle = new float[3*(numTris+2)*2]; // numFloats = numVerts * 3 = 36
     circle[0] = circle[1] = circle[2] = 0.0;
     float deltaAngle = 2.0f * 3.1415926535897932384626433832795f / numTris;
     for (int i = 1; i < numTris+2; i++) {
@@ -587,13 +587,13 @@ class Window {
   }
    
  private:
-  int _windowWidth, _windowHeight;
-  float _elapsedTime;
-  float _dt;
-  float _lastx, _lasty;
+  int _windowWidth = 0, _windowHeight = 0;
+  float _elapsedTime = 0;
+  float _dt = 0;
+  float _lastx = 0, _lasty = 0;
   struct GLFWwindow* _window = 0;
-  GLuint _triVao, _squareVao, _circleVao;
-  GLuint _colorUniform, _sizeUniform, _posUniform;
+  GLuint _triVao = 0, _squareVao = 0, _circleVao = 0;
+  GLuint _colorUniform = 0, _sizeUniform = 0, _posUniform = 0;
   const int numTris = 32; // for circles
 
  protected:
