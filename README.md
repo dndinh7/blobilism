@@ -21,7 +21,11 @@ This demo implements a simple drawing program based on a circle brush.
   The user can then clear the screen by pressing 'c'.
   
 Here is a demo of the program:
-https://user-images.githubusercontent.com/72237791/214947404-4b959895-f3e3-416f-bc50-9dd57b883db4.mp4
+
+https://user-images.githubusercontent.com/72237791/214947707-5f07f02a-2bae-4941-b1d5-8b24bd13609a.mp4
+
+
+
 
 
   
